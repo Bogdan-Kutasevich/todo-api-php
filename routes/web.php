@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\TodosController;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::controller(TodosController::class)->group(function () {
+    Route::get('/todos', 'index');
+    Route::post('/todos', 'store');
+    Route::patch('/todos/{id}', 'update');
+    Route::delete('/todos/{id}', 'destroy');
+});
+
+//Route::resource('todos', TodosController::class)->only([
+//    'index', 'store', 'show', 'update', 'destroy'
+//]);
